@@ -24,35 +24,18 @@
             <div class="collapse navbar-collapse" id="navbarHamburger">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link text-warning" href="#">ADD NOTE<span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-warning" href="#notes">ADD NOTE<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-warning" href="#">ADD CHEKCLIST</a>
+                        <a class="nav-link text-warning" href="#lists">ADD CHECKLIST</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- first open page text -->
-    <section class="first_open" style="background-color: #ffdb58; height: 90vh;">
-        <div class="container text-wrap">
-            <div class="row mx-auto pt-5">
-                <div class="title col justify-content-md-center">
-                    <p class="text-center text-info pt-5" style="font-size: 1.5rem;">Welcome to <span class="font-weight-bold text-danger">TO DO LIST</span> from <a class="font-weight-bold text-danger" href="#" style="font-family: Kurale, serif; font-size: 1.7rem;">RSP TEAM</a></p>
-                    <p class="text-center text-info" style="font-size: 1.7rem;">Your list is empty</p>
-                    <p class="text-center text-info" style="font-size: 1.7rem;">For add your first note, enter please on</p>
-                    <div class="button_add text-center">
-                        <button type="button" class="btn btn-dark" style="color: #ffdb58;">ADD NOTE</button>
-                        <button type="button" class="btn btn-dark" style="color: #ffdb58;">ADD CHECKLIST</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Preloader -->
-    <section class="preloader" style="background-color: #ffdb58; height: 90vh;">
+    <section class="preloader js-preloader" style="background-color: #ffdb58; height: 90vh; display: none;">
         <div class="text-center pt-5">
             <div class="spinner-border">
                 <span class="sr-only">Loading...</span>
@@ -61,7 +44,7 @@
     </section>
 
     <!-- Error -->
-    <section class="error" style="background-color: #ffdb58; height: 90vh;">
+    <section class="error js-error" style="background-color: #ffdb58; height: 90vh; display: none;">
         <div class="container text-wrap">
             <div class="row justify-content-md-center pt-5">
                 <div class="title col pt-5">
@@ -71,98 +54,14 @@
         </div>
     </section>
 
-    <!-- lists -->
-    <section class="list_notes" style="background-color: #ffdb58;">
-        <div class="container">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">Title</a>
-                <a href="#" class="list-group-item list-group-item-action">New note</a>
-            </div>
-        </div>
-    </section>
+    <section class="js-content"></section>
 
-    <!-- first note -->
-    <section class="first_note" style="background-color: #ffdb58; height: 90vh;">
-        <div class="container">
-            <div class="row mx-auto pt-5">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some text</p>
-                        <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- first checklist -->
-    <section class="first_checklist" style="background-color: #ffdb58; height: 90vh;">
-        <div class="container">
-            <div class="row mx-auto pt-5">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Card title</h5>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text bg-dark">
-                                    <input type="radio" aria-label="Radio button for following text input">
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button">
-                        </div>
-                        <a href="#" class="btn btn-dark mt-3" style="color: #ffdb58; width: 50%;">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- edit note -->
-    <section class="first_checklist" style="background-color: #ffdb58; height: 90vh;">
-        <div class="container">
-            <div class="row mx-auto pt-5">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some text</p>
-                        <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-                        <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-                    </div>
-                    <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- edit checklist -->
-    <section class="first_checklist" style="background-color: #ffdb58; height: 90vh;">
-        <div class="container">
-            <div class="row mx-auto pt-5">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Card title</h5>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text bg-dark">
-                                    <input type="radio" aria-label="Radio button for following text input">
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button">
-                        </div>
-                        <a href="#" class="btn btn-dark mt-3" style="color: #ffdb58; width: 50%;">Submit</a>
-                        <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-                    </div>
-                    <a href="#" class="btn btn-dark" style="color: #ffdb58; width: 50%;">Submit</a>
-
-                </div>
-            </div>
-        </div>
-    </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./app/js/allNotes.js"></script>
     <script src="./app/js/notes.js"></script>
     <script src="./app/js/lists.js"></script>
 </body>
