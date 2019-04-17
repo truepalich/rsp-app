@@ -34,27 +34,29 @@
         </div>
     </nav>
 
-    <!-- Preloader -->
-    <section class="preloader js-preloader" style="background-color: #ffdb58; height: 90vh; display: none;">
-        <div class="text-center pt-5">
-            <div class="spinner-border">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Error -->
-    <section class="error js-error" style="background-color: #ffdb58; height: 90vh; display: none;">
-        <div class="container text-wrap">
-            <div class="row justify-content-md-center pt-5">
-                <div class="title col pt-5">
-                    <p class="text-center text-danger pt-5" style="font-size: 1.7rem;">ERROR: Something bad happened!</p>
+    <div class="container fluid">
+        <!-- Preloader -->
+        <section class="preloader js-preloader" style="background-color: #ffdb58; display: none;">
+            <div class="text-center pt-5">
+                <div class="spinner-border">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="js-content"></section>
+        <!-- Error -->
+        <section class="error js-error" style="background-color: #ffdb58; display: none;">
+            <div class="container text-wrap">
+                <div class="row justify-content-md-center pt-5">
+                    <div class="title col pt-5">
+                        <p class="text-center text-danger pt-5" style="font-size: 1.7rem;">ERROR: Something bad happened!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="js-content"></section>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
