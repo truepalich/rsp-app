@@ -2,7 +2,7 @@ console.log('listjs loaded');
 
 const content = $('.js-content');
 
-const form = $(`<div class="row js-common-section" id="add-list-section" style="display: block">
+const form = $(`<div class="row js-common-section" id="add-list-section" style="display: none">
    <div class="col">
       <h4>Add list</h4>
       <form>
@@ -25,6 +25,17 @@ const form = $(`<div class="row js-common-section" id="add-list-section" style="
 
 
 content.append(form);
+let show = false;
+$('.js-link-add-list').click(function () {
+
+    if (!show){
+        $('#add-list-section').show()
+        show = !show
+    } else {
+        $('#add-list-section').hide();
+        show = !show
+    }
+})
 
 $('body').on('click','#btnGroupAddon',function (e) {
     e.preventDefault();
