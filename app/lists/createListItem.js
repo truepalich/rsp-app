@@ -5,7 +5,8 @@ module.exports = (app, collection) => {
         return console.log(err)
       }
       console.log('new item received');
-      res.send(`ONE LIST ITEM WAS ADDED`)
+      // res.send(`ONE LIST ITEM WAS ADDED`)
+      res.send(JSON.stringify({msg:'One item was added'}))
     })
   });
 };
