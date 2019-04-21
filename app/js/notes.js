@@ -1,5 +1,5 @@
 $(document ).ready(function() {
-    $(window).on('popstate', function () {
+    // $(window).on('popstate', function () {
 
         // Load Add-note page after refresh
         if (window.location.hash && window.location.hash == '#notes') {
@@ -9,7 +9,7 @@ $(document ).ready(function() {
         // Load Edit-note page after refresh
         if (window.location.hash && window.location.hash.includes('#notes/')) {
             showEditNoteForm();
-            //#notes/5cb6fbdece89b03b840e4eb5
+            //#notes/5cbc96c47c2b9b029beef540
         }
 
         // Load Add-note page after click
@@ -27,11 +27,11 @@ $(document ).ready(function() {
                 '                    <h4>Add note</h4>\n' +
                 '                    <form>\n' +
                 '                        <div class="form-group">\n' +
-                '                            <label>Title</label>\n' +
+                '                            <label>Title:</label>\n' +
                 '                            <input type="text" class="form-control js-form-note-title">\n' +
                 '                        </div>\n' +
                 '                        <div class="form-group">\n' +
-                '                            <label>Description</label>\n' +
+                '                            <label>Description:</label>\n' +
                 '                            <textarea class="form-control js-form-note-text" rows="3"></textarea>\n' +
                 '                        </div>\n' +
                 '                        <button type="submit" class="btn btn-primary btn-block js-submit-form">Submit</button>\n' +
@@ -43,11 +43,12 @@ $(document ).ready(function() {
 
             // Add-note action
             $('.js-submit-form').click(function (e) {
+                e.preventDefault();
                 let formTitle = $('.js-form-note-title').val();
                 let formText = $('.js-form-note-text').val();
                 if (formTitle.length > 0 && formText.length > 0) {
                     $('.js-error').hide();
-                    $('.js-common-section').hide();
+                    // $('.js-common-section').hide();
                     $('.js-preloader').show();
 
                     axios.post('http://localhost:3000/api/notes/', {
@@ -56,8 +57,8 @@ $(document ).ready(function() {
                         type: 'notes'
                     })
                         .then(function (response) {
-                            console.log(window.location);
-                            window.location.href = window.location.origin + window.location.pathname;
+                            // window.location.href = window.location.origin + window.location.pathname;
+                            window.location.hash = '#';
                         })
                         .catch(function (error) {
                             $('.js-error').text(error.message);
@@ -69,16 +70,21 @@ $(document ).ready(function() {
                         });
 
                 } else {
+                    // Validate form
+                    if (formTitle.length == 0) {
+                        $('#add-note-section .js-form-note-title').addClass('border-danger');
+                    } else {
+                        $('#add-note-section .js-form-note-title').removeClass('border-danger');
+                    }
+                    if (formText.length == 0) {
+                        $('#add-note-section .js-form-note-text').addClass('border-danger');
+                    } else {
+                        $('#add-note-section .js-form-note-text').removeClass('border-danger');
+                    }
                     $('.js-error').text('Please enter Title and Description');
                     $('.js-error').show();
                 }
-                e.preventDefault();
             })
-
-
-
-
-
         }
 
         // Render Edit-note page
@@ -87,20 +93,20 @@ $(document ).ready(function() {
 
             // Markup of Edit-note page
             let htmlTemplate = '<h4>Single note</h4>\n' +
-                '        <form>\n' +
+                '        <form id="edit-note-section">\n' +
                 '            <div class="form-group">\n' +
-                '                <label>Title</label>\n' +
+                '                <label>Title:</label>\n' +
                 '                <input type="text" class="form-control js-form-note-title">\n' +
                 '            </div>\n' +
                 '            <div class="form-group">\n' +
-                '                <label>Description</label>\n' +
+                '                <label>Description:</label>\n' +
                 '                <textarea class="form-control js-form-note-text" rows="3"></textarea>\n' +
                 '            </div>\n' +
                 '            <button type="submit" class="btn btn-primary btn-block js-btn-edit">Edit</button>\n' +
                 '            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal">Delete</a>\n' +
                 '            <a href="#" class="btn btn-primary btn-block">Back to notes</a>\n' +
                 '        </form>\n' +
-                '        <div class="modal fade js-modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">\n' +
+                '        <div class="modal js-modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">\n' +
                 '            <div class="modal-dialog">\n' +
                 '                <div class="modal-content">\n' +
                 '                    <div class="modal-header">\n' +
@@ -146,7 +152,7 @@ $(document ).ready(function() {
 
                 axios.delete('http://localhost:3000/api/notes/' + window.location.hash.replace('#notes/', ''))
                     .then(function (response) {
-                        window.location.href = window.location.origin + window.location.pathname;
+                        window.location.hash = '#';
                     })
                     .catch(function (error) {
                         $('.js-error').text(error.message);
@@ -169,7 +175,7 @@ $(document ).ready(function() {
                     axios.put('http://localhost:3000/api/notes/' + window.location.hash.replace('#notes/', ''), {
                             title: formTitle,
                             desc: formText,
-                            type: 'note'
+                            type: 'notes'
                         })
                         .then(function (response) {
                             window.location.hash = '#';
@@ -183,6 +189,17 @@ $(document ).ready(function() {
                             $('.js-preloader').hide();
                         });
                 } else {
+                    // Validate form
+                    if (formTitle.length == 0) {
+                        $('#edit-note-section .js-form-note-title').addClass('border-danger');
+                    } else {
+                        $('#edit-note-section .js-form-note-title').removeClass('border-danger');
+                    }
+                    if (formText.length == 0) {
+                        $('#edit-note-section .js-form-note-text').addClass('border-danger');
+                    } else {
+                        $('#edit-note-section .js-form-note-text').removeClass('border-danger');
+                    }
                     $('.js-error').text('Please enter Title and Description');
                     $('.js-error').show();
                 }
@@ -198,5 +215,5 @@ $(document ).ready(function() {
             $('.js-content').text('');
         }
 
-    });
+    // });
 });

@@ -9,6 +9,9 @@ if (window.location.hash == '') {
 
 $(window).on('popstate', function () {
     if (window.location.hash == '') {
+        $('.js-content').text('');
+        $('.js-error').hide();
+
         generateContent();
     }
 })
