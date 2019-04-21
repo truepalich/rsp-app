@@ -81,8 +81,14 @@
                 type: "lists"
             };
 
-        window.location.hash = '#';
-        console.log(formData)
+        $('.js-preloader').show();
+
+        axios.post('http:/localhost:3000/api/lists',formData)
+          .then(function (res) {
+              window.location.hash = '#';
+              $('.js-preloader').hide()
+    })
+
     }
 
 
@@ -117,3 +123,5 @@
     });
 
 })();
+
+
