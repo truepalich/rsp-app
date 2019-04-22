@@ -1,7 +1,6 @@
-
+const form = $('.js-content');
+console.log('listjs loaded');
 (function () {
-    console.log('listjs loaded');
-    const form = $('.js-content');
     let formData =
         {
             title: "Title of list",
@@ -124,4 +123,63 @@
 
 })();
 
+// <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+// data.list[0].text
 
+function generateListItem(data){
+    return `
+<ul class="list-group">
+  ${data.list.map((item,i)=>{
+      return `<li class="list-group-item js-list-item
+                ${data.list[i].status === false ? "js-list-item-inactive" : ""}"
+                data-status=${data.list[i].status}>${data.list[i].text}
+            </li>`
+    }).join('')}
+</ul>
+<button type="button" class="btn btn-primary btn-lg btn-block js-update-list-item">Save</button>`
+}
+
+
+form.empty();
+let errorCount = 0;
+async function getListItem() {
+    try {
+        const response = await axios.get('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97');
+        form.append(generateListItem(response.data[0]))
+    } catch (error) {
+        errorCount++;
+        if (errorCount === 5){
+            return $('.js-error').show()
+        }
+        getListItem();
+    }
+}
+getListItem();
+
+
+
+
+$('body').on('click','.js-list-item',function () {
+    // console.log(typeof $(this).data('status'));
+    let statusValue = $(this).attr('data-status');
+
+    if (statusValue === 'true'){
+        $(this).addClass('js-list-item-inactive');
+        statusValue = 'false'
+        $(this).removeAttr('data-status')
+        console.log(statusValue)
+        $(this).attr('data-status', statusValue)
+
+    } else if (statusValue === 'false'){
+        $(this).removeClass('js-list-item-inactive');
+        statusValue = 'true'
+        $(this).removeAttr('data-status')
+        $(this).attr('data-status', statusValue)
+    }
+
+})
+
+
+$('body').on('click','.js-update-list-item',function () {
+
+})

@@ -1,0 +1,8 @@
+.js-list-item {
+    cursor: pointer;
+}
+.js-list-item-inactive {
+    text-decoration: line-through;
+    color: grey;
+    background-color: rgba(156, 220, 236, 0.4)
+}
