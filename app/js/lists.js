@@ -126,6 +126,10 @@ console.log('listjs loaded');
 // <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
 // data.list[0].text
 
+
+const data = {"_id":{"$oid":"5cbe0c7ee162ec0e1ceeef97"},"title":"Item for test","list":[{"text":"First element","status":true},{"text":"Second element","status":true},{"text":"Third element","status":true},{"text":"Fourth element","status":false},{"text":"Fifth element","status":true}],"type":"lists"}
+
+
 function generateListItem(data){
     return `
 <ul class="list-group">
@@ -144,8 +148,9 @@ form.empty();
 let errorCount = 0;
 async function getListItem() {
     try {
-        const response = await axios.get('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97');
-        form.append(generateListItem(response.data[0]))
+        // const response = await axios.get('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97');
+        // form.append(generateListItem(response.data[0]))
+        form.append(generateListItem(data))
     } catch (error) {
         errorCount++;
         if (errorCount === 5){
@@ -166,20 +171,25 @@ $('body').on('click','.js-list-item',function () {
     if (statusValue === 'true'){
         $(this).addClass('js-list-item-inactive');
         statusValue = 'false'
-        $(this).removeAttr('data-status')
-        console.log(statusValue)
         $(this).attr('data-status', statusValue)
 
     } else if (statusValue === 'false'){
         $(this).removeClass('js-list-item-inactive');
-        statusValue = 'true'
-        $(this).removeAttr('data-status')
+        statusValue = 'true';
         $(this).attr('data-status', statusValue)
     }
 
-})
+});
 
 
-$('body').on('click','.js-update-list-item',function () {
-
-})
+$('body').on('click','.js-update-list-item',async function (e) {
+    e.preventDefault();
+    let data = [];
+    try {
+        const response = await axios.put('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97',data);
+        window.location.href = "#";
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
+});
