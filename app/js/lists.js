@@ -62,7 +62,7 @@ console.log('listjs loaded');
     });
 
 
-    function sendFormData() {
+    async function sendFormData() {
         let list = [];
         $('.list-elem-data').each(function () {
             list.push(
@@ -82,11 +82,19 @@ console.log('listjs loaded');
 
         $('.js-preloader').show();
 
-        axios.post('http:/localhost:3000/api/lists',formData)
-          .then(function (res) {
-              window.location.hash = '#';
-              $('.js-preloader').hide()
-    })
+        try {
+            await axios.post('http:/localhost:3000/api/lists',formData);
+            window.location.hash = '#';
+            $('.js-preloader').hide()
+        } catch (error) {
+            console.error(error);
+        }
+
+    //     axios.post('http:/localhost:3000/api/lists',formData)
+        //       .then(function (res) {
+        //           window.location.hash = '#';
+        //           $('.js-preloader').hide()
+        //          })
 
     }
 
@@ -136,8 +144,7 @@ function generateListItem(data){
   ${data.list.map((item,i)=>{
       return `<li class="list-group-item js-list-item
                 ${data.list[i].status === false ? "js-list-item-inactive" : ""}"
-                data-status=${data.list[i].status}>${data.list[i].text}
-            </li>`
+                data-status=${data.list[i].status}>${data.list[i].text}</li>`
     }).join('')}
 </ul>
 <button type="button" class="btn btn-primary btn-lg btn-block js-update-list-item">Save</button>`
@@ -185,10 +192,20 @@ $('body').on('click','.js-list-item',function () {
 $('body').on('click','.js-update-list-item',async function (e) {
     e.preventDefault();
     let data = [];
+
+    $('.js-list-item').each(function () {
+        data.push(
+            {
+                text: $(this).text().replace('\n',''),
+                status: $(this).attr('data-status')
+            }
+        )
+    });
+
     try {
-        const response = await axios.put('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97',data);
+        // const response = await axios.put('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97',data);
         window.location.href = "#";
-        console.log(response);
+        console.log(data);
     } catch (error) {
         console.error(error);
     }
