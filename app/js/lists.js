@@ -203,7 +203,7 @@ $('body').on('click','.js-update-list-item',async function (e) {
     });
 
     try {
-        // const response = await axios.put('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97',data);
+        const response = await axios.put('http://localhost:3000/lists/5cbe0c7ee162ec0e1ceeef97',JSON.stringify(data));
         window.location.href = "#";
         console.log(data);
     } catch (error) {
