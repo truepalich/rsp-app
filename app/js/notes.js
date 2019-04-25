@@ -1,4 +1,19 @@
-$(document ).ready(function() {
+$(window).on('popstate', function () {
+    // Load Add-note page after refresh
+    if (window.location.hash && window.location.hash == '#notes') {
+        showAddNoteForm();
+    }
+
+    // Load Edit-note page after refresh
+    if (window.location.hash && window.location.hash.includes('#notes/')) {
+        showEditNoteForm();
+        //#notes/5cbc96c47c2b9b029beef540
+    }
+})
+
+
+
+// $(document ).ready(function() {
     // $(window).on('popstate', function () {
 
         // Load Add-note page after refresh
@@ -216,4 +231,4 @@ $(document ).ready(function() {
         }
 
     // });
-});
+// });
