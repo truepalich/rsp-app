@@ -23,19 +23,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-
-
-
-app.get('/api/lists/:id',(req,res)=>{
-  res.send(`API LIST ID IS : ${req.params.id}`)
-});
-
-
-app.delete('/api/lists/:id',(req,res)=>{
-  res.send(`ONE LIST WAS DELETED  ${req.params.id}`)
-});
-
-
 MongoClient.connect(db.url,{useNewUrlParser:true},(err, client)=>{
 
 

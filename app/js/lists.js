@@ -93,13 +93,6 @@ $(document).ready(function () {
     } catch (error) {
       console.error(error);
     }
-
-    //     axios.post('http:/localhost:3000/api/lists',formData)
-    //       .then(function (res) {
-    //           window.location.hash = '#';
-    //           $('.js-preloader').hide()
-    //          })
-
   }
 
 
@@ -114,15 +107,15 @@ $(document).ready(function () {
       $(this).removeClass('border-danger')
     });
 
-    let empty = formControl.filter(function () {
+    let emptyElements = formControl.filter(function () {
       return this.value === ''
     });
 
-    empty.map(function () {
+    emptyElements.map(function () {
       $(this).addClass('border-danger');
     });
 
-    if (empty.length === 0) {
+    if (emptyElements.length === 0) {
       callback();
     }
   }
@@ -133,27 +126,27 @@ $(document).ready(function () {
     }
   });
 
-})
+});
 
 $(document).ready(function () {
 
-  const itemId = window.location.hash.split('/').pop();
+  let itemId = window.location.hash.split('/').pop();
 
   function generateListItem(data) {
     return `
-<ul class="list-group">
+        <ul class="list-group">
   ${data.list.map((item, i) => {
       return `<li class="list-group-item js-list-item
                 ${data.list[i].status === 'false' ? "js-list-item-inactive" : ""}"
                 data-status=${data.list[i].status}>${data.list[i].text}</li>`
     }).join('')}
 </ul>
-<button type="button" class="btn btn-primary btn-lg btn-block js-update-list-item">Save</button>
-<button type="button" class="btn btn-primary btn-lg btn-block js-back-to-index">Return to homepage</button>`
+        <button type="button" class="btn btn-primary btn-lg btn-block js-update-list-item">Save</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-danger js-delete-list-item">Delete list</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block js-back-to-index">Return to homepage</button>`
   }
 
 
-  form.empty();
   let errorCount = 0;
 
   async function getListItem(id) {
@@ -171,21 +164,9 @@ $(document).ready(function () {
     }
   }
 
-  if (window.location.hash.includes('#api/lists/')) {
-    if (checkUrl()){
-      getListItem(itemId)
-    }
+  if (itemId.length === 24) {
+    getListItem(itemId)
   }
-
-  function checkUrl(){
-    if (window.location.hash === '#api/lists/' || window.location.hash === '#api/lists' ){
-      window.location.hash = '#';
-      return false
-    }else {
-      return true
-    }
-  }
-
 
 
   $('body').on('click', '.js-list-item', function () {
@@ -213,6 +194,7 @@ $(document).ready(function () {
   $('body').on('click', '.js-update-list-item', async function (e) {
     e.preventDefault();
     let data = [];
+    $('.js-preloader').show();
 
     $('.js-list-item').each(function () {
       data.push(
@@ -225,29 +207,36 @@ $(document).ready(function () {
 
     try {
       await axios.put(`http://localhost:3000/api/lists/${itemId}`, data);
-      console.log(data);
+      $('.js-preloader').hide();
     } catch (error) {
-      console.error(error);
+      return $('.js-error').show()
     }
   });
 
 
 
   $(window).on('popstate',function () {
-    if (window.location.hash.includes('#api/lists/')) {
-      if (checkUrl()){
-        getListItem(itemId)
-      }
-    }
+     itemId = window.location.hash.split('/').pop();
+
+     if (window.location.hash.includes('#lists/') && itemId.length === 24) {
+       getListItem(itemId)
+     }
+
   })
 
-});
 
 
+  $('body').on('click', '.js-delete-list-item', async function (e) {
+    e.preventDefault();
+    $('.js-preloader').show();
 
+    try {
+      await axios.delete(`http://localhost:3000/api/lists/${itemId}`);
+      $('.js-preloader').hide();
+      window.location.hash = '#';
+    } catch (error) {
+      return $('.js-error').show()
+    }
+  });
 
-$(window).on('popstate', function () {
-  if (window.location.hash === '' || window.location.hash === '#') {
-    form.empty()
-  }
 });

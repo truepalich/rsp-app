@@ -6,9 +6,7 @@ module.exports = (app, collection) => {
       if (err) {
         return console.log(err)
       }
-      console.log('old item updated');
-      console.log(req.body)
-      res.send(`ONE LIST ITEM WAS UPDATED`)
+      res.send(JSON.stringify({msg:'One item was updated'}))
     })
   });
 };

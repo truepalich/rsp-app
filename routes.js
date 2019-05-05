@@ -2,6 +2,7 @@ const getList = require('./app/lists/getList');
 const createListItem = require('./app/lists/createListItem');
 const getListItem = require('./app/lists/getListItem');
 const editListItem = require('./app/lists/editListItem');
+const deleteListItem = require('./app/lists/deleteListItem');
 /*-----------------------*/
 const getAllNotes = require('./app/notes/getAllNotes');
 const addNote = require('./app/notes/addNote');
@@ -14,6 +15,7 @@ module.exports = (app, collection) => {
   createListItem(app, collection);
   getListItem(app, collection);
   editListItem(app, collection);
+  deleteListItem(app, collection);
   /*-----------------------*/
   getAllNotes(app, collection);
   getNote(app, collection);
