@@ -241,7 +241,7 @@ $(document).ready(function () {
     }
   })
 
-})
+});
 
 
 
