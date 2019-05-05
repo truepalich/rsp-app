@@ -226,17 +226,50 @@ $(document).ready(function () {
 
 
 
-  $('body').on('click', '.js-delete-list-item', async function (e) {
+  $('body').on('click', '.js-delete-list-item', function (e) {
+
+    form.append(
+        '        <div class="modal js-modal" id="modal" tabindex="-1" role="dialog" aria-hidden="true">\n' +
+        '            <div class="modal-dialog">\n' +
+        '                <div class="modal-content">\n' +
+        '                    <div class="modal-header">\n' +
+        '                        <h5 class="modal-title">Are you sure, you want to delete?</h5>\n' +
+        '                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+        '                            <span aria-hidden="true">&times;</span>\n' +
+        '                        </button>\n' +
+        '                    </div>\n' +
+        '                    <div class="modal-footer">\n' +
+        '                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>\n' +
+        '                        <button type="button" class="btn btn-primary js-btn-delete-list">Yes</button>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '        </div>'
+    );
+
     e.preventDefault();
     $('.js-preloader').show();
+    $('.js-modal').modal('show');
 
-    try {
-      await axios.delete(`http://localhost:3000/api/lists/${itemId}`);
-      $('.js-preloader').hide();
-      window.location.hash = '#';
-    } catch (error) {
-      return $('.js-error').show()
-    }
+    $('.js-modal').on('hidden.bs.modal', function (e) {
+      $('.js-modal').remove()
+    })
+
+    $('.js-btn-delete-list').on('click',async function () {
+      try {
+        await axios.delete(`http://localhost:3000/api/lists/${itemId}`);
+        $('.js-preloader').hide();
+        $('.js-modal').modal('hide')
+        window.location.hash = '#';
+      } catch (error) {
+        return $('.js-error').show()
+      }
+
+    })
+
+
+
+
   });
 
 });
