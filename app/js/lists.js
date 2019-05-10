@@ -1,4 +1,5 @@
 const form = $('.js-content');
+const link = 'https://shielded-earth-58434.herokuapp.com/';
 
 
 $(document).ready(function () {
@@ -87,7 +88,7 @@ $(document).ready(function () {
     $('.js-preloader').show();
 
     try {
-      await axios.post('http:/localhost:3000/api/lists', formData);
+      await axios.post(`${link}api/lists`, formData);
       window.location.hash = '#';
       $('.js-preloader').hide()
     } catch (error) {
@@ -152,7 +153,7 @@ $(document).ready(function () {
   async function getListItem(id) {
 
     try {
-      const response = await axios.get(`http://localhost:3000/lists/${id}`);
+      const response = await axios.get(`${link}lists/${id}`);
       form.empty();
       form.append(generateListItem(response.data[0]))
     } catch (error) {
@@ -206,7 +207,7 @@ $(document).ready(function () {
     });
 
     try {
-      await axios.put(`http://localhost:3000/api/lists/${itemId}`, data);
+      await axios.put(`${link}api/lists/${itemId}`, data);
       $('.js-preloader').hide();
     } catch (error) {
       return $('.js-error').show()
@@ -257,7 +258,7 @@ $(document).ready(function () {
 
     $('.js-btn-delete-list').on('click',async function () {
       try {
-        await axios.delete(`http://localhost:3000/api/lists/${itemId}`);
+        await axios.delete(`${link}api/lists/${itemId}`);
         $('.js-preloader').hide();
         $('.js-modal').modal('hide')
         window.location.hash = '#';

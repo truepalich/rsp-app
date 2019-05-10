@@ -36,7 +36,7 @@ MongoClient.connect(db.url,{useNewUrlParser:true},(err, client)=>{
 
   app.listen(port, () => { // назначаем порт для прослушивания
     console.log('Connected to '+ db.url);
-    console.log('We are live on http://localhost:3000');
+    console.log('We are live on :' + port);
   });
 });
 
