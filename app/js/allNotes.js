@@ -23,7 +23,7 @@ function generateContent() {
       <h4 style="text-align: center">YOUR LIST OF NOTES</h4>
       <div class="list-group"></div>`);
 
-    axios.get('http://localhost:3000/api/all-notes')
+    axios.get('https://shielded-earth-58434.herokuapp.com/api/all-notes')
         .then(function(response) {
             listNotes;
 

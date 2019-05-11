@@ -1,3 +1,5 @@
+const BASE_URL = 'https://shielded-earth-58434.herokuapp.com/';
+
 $(window).on('popstate', function () {
     // Load Add-note page after refresh
     if (window.location.hash && window.location.hash == '#notes') {
@@ -10,8 +12,6 @@ $(window).on('popstate', function () {
         //#notes/5cbc96c47c2b9b029beef540
     }
 })
-
-
 
 // $(document ).ready(function() {
     // $(window).on('popstate', function () {
@@ -66,7 +66,7 @@ $(window).on('popstate', function () {
                     // $('.js-common-section').hide();
                     $('.js-preloader').show();
 
-                    axios.post('http://localhost:3000/api/notes/', {
+                    axios.post(BASE_URL + 'api/notes/', {
                         title: formTitle,
                         desc: formText,
                         type: 'notes'
@@ -144,7 +144,7 @@ $(window).on('popstate', function () {
 
             // Add data to Edit-note page
             if (window.location.hash && window.location.hash.includes('#notes/')) {
-                axios.get('http://localhost:3000/notes/' + window.location.hash.replace('#notes/', ''))
+                axios.get(BASE_URL + 'notes/' + window.location.hash.replace('#notes/', ''))
                     .then(function (response) {
                         $('.js-form-note-title').val(response.data.title);
                         $('.js-form-note-text').val(response.data.desc);
@@ -165,7 +165,7 @@ $(window).on('popstate', function () {
                 $('.js-modal').modal('hide');
                 preShowContent();
 
-                axios.delete('http://localhost:3000/api/notes/' + window.location.hash.replace('#notes/', ''))
+                axios.delete(BASE_URL + 'api/notes/' + window.location.hash.replace('#notes/', ''))
                     .then(function (response) {
                         window.location.hash = '#';
                     })
@@ -187,7 +187,7 @@ $(window).on('popstate', function () {
                 if (formTitle.length > 0 && formText.length > 0) {
                     $('.js-preloader').show();
 
-                    axios.put('http://localhost:3000/api/notes/' + window.location.hash.replace('#notes/', ''), {
+                    axios.put(BASE_URL + 'api/notes/' + window.location.hash.replace('#notes/', ''), {
                             title: formTitle,
                             desc: formText,
                             type: 'notes'
